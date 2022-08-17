@@ -15,7 +15,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
+require("./connect")
+require("./routes/user")(app);
 
 // server start
  app.listen(process.env.PORT || 3500,() =>{
