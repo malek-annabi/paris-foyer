@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 require("./connect")
 require("./routes/user")(app);
 require("./routes/student")(app);
+require("./routes/contrat")(app);
 
 // server start
  app.listen(process.env.PORT || 3500,() =>{

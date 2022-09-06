@@ -115,7 +115,7 @@ exports.getStudents = (req, res, next) => {
         .status(400)
         .json({
           status: "bad request",
-          message: "etudiant non ajoute!",
+          message: "erreur !",
           err: err.message,
         })
     )
