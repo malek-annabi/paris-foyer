@@ -1,7 +1,6 @@
 exports.addContract = (req, res, next) => {
     if (!req.body) return next(new AppError("No form data found", 404));
     let idEtudiant = req.body.idEtudiant;
-    let NumDossier = req.body.NumDossier;
     let dateDebut = req.body.dateDebut;
     let dateFin = req.body.dateFin;
     let montant = req.body.montant;
@@ -18,8 +17,8 @@ exports.addContract = (req, res, next) => {
     con
       .promise()
       .query(
-        "INSERT INTO contrat (NumDossier,dateDebut,dateFin,montant,coution,faitA,faitLe,numChambre,typePayement,statusPayement,status,dateEntre,dateSortie,Etudiant_idEtudiant) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
-        [NumDossier, dateDebut, dateFin, montant, coution, faitA, faitLe, numChambre, typePayement, statusPayement, status, dateEntre, dateSortie, idEtudiant]
+        "INSERT INTO contrat (dateDebut,dateFin,montant,coution,faitA,faitLe,numChambre,typePayement,statusPayement,status,dateEntre,dateSortie,Etudiant_idEtudiant) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+        [dateDebut, dateFin, montant, coution, faitA, faitLe, numChambre, typePayement, statusPayement, status, dateEntre, dateSortie, idEtudiant]
       )
       .then(([rows, fields]) => {
         res.status(201).json({

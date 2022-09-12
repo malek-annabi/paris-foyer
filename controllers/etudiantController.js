@@ -1,6 +1,7 @@
 // add Student
 exports.addStudent = (req, res, next) => {
   if (!req.body) return next(new AppError("No form data found", 404));
+  let numDossier= req.body.numDossier;
   let nom = req.body.nom;
   let prenom = req.body.prenom;
   let nationalite = req.body.nationalite;
@@ -12,8 +13,8 @@ exports.addStudent = (req, res, next) => {
   con
     .promise()
     .query(
-      "INSERT INTO etudiant (nom,prenom,tel,nationalite,dateNaissance,lieuNaissance,CIN) VALUES (?,?,?,?,?,?,?);",
-      [nom, prenom, tel, nationalite, dateNaissance, lieuNaissance, cin]
+      "INSERT INTO etudiant (numDossier,nom,prenom,tel,nationalite,dateNaissance,lieuNaissance,CIN) VALUES (?,?,?,?,?,?,?);",
+      [numDossier,nom, prenom, tel, nationalite, dateNaissance, lieuNaissance, cin]
     )
     .then(([rows, fields]) => {
       res.status(201).json({
@@ -33,6 +34,7 @@ exports.addStudent = (req, res, next) => {
 };
 exports.updateStudent = (req, res, next) => {
   if (!req.body) return next(res.send("No form data found", 404));
+  let numDossier = req.body.numDossier;
   let nom = req.body.nom;
   let prenom = req.body.prenom;
   let nationalite = req.body.nationalite;
@@ -45,8 +47,9 @@ exports.updateStudent = (req, res, next) => {
   con
     .promise()
     .query(
-      "UPDATE etudiant SET nom=?,prenom=?,tel=?,nationalite=?,dateNaissance=?,lieuNaissance=?,CIN=? WHERE idEtudiant=?;",
+      "UPDATE etudiant SET numDossier=?,nom=?,prenom=?,tel=?,nationalite=?,dateNaissance=?,lieuNaissance=?,CIN=? WHERE idEtudiant=?;",
       [
+        numDossier,
         nom,
         prenom,
         tel,
