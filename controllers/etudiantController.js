@@ -8,12 +8,12 @@ exports.addStudent = (req, res, next) => {
   let tel = req.body.tel;
   let dateNaissance = req.body.dateNaissance;
   let lieuNaissance = req.body.lieuNaissance;
-  let cin = req.body.cin;
+  let cin = req.body.CIN;
   // add in cockpit database
   con
     .promise()
     .query(
-      "INSERT INTO etudiant (numDossier,nom,prenom,tel,nationalite,dateNaissance,lieuNaissance,CIN) VALUES (?,?,?,?,?,?,?);",
+      "INSERT INTO etudiant (numDossier,nom,prenom,tel,nationalite,dateNaissance,lieuNaissance,CIN) VALUES (?,?,?,?,?,?,?,?);",
       [numDossier,nom, prenom, tel, nationalite, dateNaissance, lieuNaissance, cin]
     )
     .then(([rows, fields]) => {
@@ -31,6 +31,7 @@ exports.addStudent = (req, res, next) => {
           err: err.message,
         })
     )
+    location.reload();
 };
 exports.updateStudent = (req, res, next) => {
   if (!req.body) return next(res.send("No form data found", 404));
